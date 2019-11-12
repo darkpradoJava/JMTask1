@@ -33,6 +33,6 @@
     </c:forEach>
 </table>
 
-<a href="/time">Узнать текущее время сервера</a>
+<a href="time.jsp">Узнать текущее время сервера</a>
 </body>
 </html>
