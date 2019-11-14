@@ -11,6 +11,6 @@
     <title>Hello</title>
 </head>
 <body>
-<h1>Current server time: <%=request.getAttribute("date") %></h1>
+<h1>Current server time: ${date}</h1>
 </body>
 </html>

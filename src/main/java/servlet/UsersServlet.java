@@ -17,11 +17,10 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
-        List<User> list = UserService.getInstance().getAllUser();
+        List<User> list = UserService.getInstance().getAllUsers();
         req.setAttribute("list", list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
         dispatcher.forward(req, resp);
-
     }
 
     @Override
