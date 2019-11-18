@@ -32,7 +32,5 @@
         </tr>
     </c:forEach>
 </table>
-
-<a href="time.jsp">Узнать текущее время сервера</a>
 </body>
 </html>

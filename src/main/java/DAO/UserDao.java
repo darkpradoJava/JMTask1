@@ -11,18 +11,10 @@ import java.util.List;
 
 public class UserDao {
 
-    private static UserDao instance = new UserDao();
     private SessionFactory sessionFactory;
 
-    private UserDao() {
-        this.sessionFactory = DBHelper.getSessionFactory();
-    }
-
-    public static UserDao getInstance() {
-        if (instance == null) {
-            instance = new UserDao();
-        }
-        return instance;
+    public UserDao() {
+        sessionFactory = DBHelper.getSessionFactory();
     }
 
     public List<User> getAllUsers() {

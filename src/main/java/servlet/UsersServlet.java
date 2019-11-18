@@ -14,20 +14,23 @@ import java.util.List;
 
 @WebServlet("/")
 public class UsersServlet extends HttpServlet {
+
+    private UserService userService = UserService.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
-        List<User> list = UserService.getInstance().getAllUsers();
+        List<User> list = userService.getAllUsers();
         req.setAttribute("list", list);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
         dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User((String) req.getAttribute("login"), (String) req.getAttribute("password"));
-        UserService.getInstance().addUser(user);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
+        userService.addUser(user);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
         dispatcher.forward(req, resp);
     }
 }
