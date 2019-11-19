@@ -15,15 +15,13 @@
 </head>
 <body>
 <h1>Задача 1</h1>
-<!--<h2>Добавление пользователя:</h2>
-<form action="/" method="POST">
-    Login: <input type="text" name="login">
-    Password: <input type="password" name="password">
-    <input type="submit" value="добавить">
-</form>
--->
-<h2>Список пользователей:</h2>
-<table border="1">
+<h3>Список пользователей:</h3>
+<table width="500px" cellspacing="0" cellpadding="0" border="1">
+    <tr>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Password</th>
+    </tr>
     <c:forEach items="${requestScope.list}" var="user">
         <tr>
             <td> ${user.id} </td>
@@ -32,5 +30,17 @@
         </tr>
     </c:forEach>
 </table>
+<p>Добавить пользователя:</p>
+<form action="" method="POST">
+    Login: <input type="text" name="login">
+    Password: <input type="password" name="password">
+    <input type="submit" value="добавить">
+</form>
+<p>Удалить пользователя по id:</p>
+<form action="" method ="POST">
+    <input type="hidden" name="action" value="delete">
+    Id: <input type="number" name="id">
+    <input type="submit" value="удалить">
+</form>
 </body>
 </html>

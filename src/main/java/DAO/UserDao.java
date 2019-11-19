@@ -50,4 +50,19 @@ public class UserDao {
         session.getTransaction().commit();
         session.close();
     }
+
+    public User getUserById(Long id) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        User user;
+        try {
+            Query query = session.createQuery("from User where id = :id").setParameter("id", id);
+            user = (User) query.uniqueResult();
+        } catch (Exception e) {
+            user = null;
+        }
+        session.getTransaction().commit();
+        session.close();
+        return user;
+    }
 }

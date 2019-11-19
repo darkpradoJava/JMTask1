@@ -28,8 +28,27 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User((String) req.getAttribute("login"), (String) req.getAttribute("password"));
-        userService.addUser(user);
+        if ("delete".equals(req.getParameter("action"))) {
+            doDelete(req, resp);
+        } else {
+            String login = req.getParameter("login");
+            String password = req.getParameter("password");
+            if (login != null && !login.equals("") && password != null && !password.equals("")) {
+                User user = new User(login, password);
+                userService.addUser(user);
+            }
+            List<User> list = userService.getAllUsers();
+            req.setAttribute("list", list);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
+            dispatcher.forward(req, resp);
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        userService.deleteUserById(Long.parseLong(req.getParameter("id")));
+        List<User> list = userService.getAllUsers();
+        req.setAttribute("list", list);
         RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
         dispatcher.forward(req, resp);
     }

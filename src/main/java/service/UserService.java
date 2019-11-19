@@ -29,4 +29,11 @@ public class UserService {
         return dao.getAllUsers();
     }
 
+    public void deleteUserById(Long id) {
+        User user = dao.getUserById(id);
+        if (user != null) {
+            dao.deleteUser(user);
+        }
+    }
+
 }
