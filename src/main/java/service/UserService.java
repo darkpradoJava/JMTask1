@@ -36,4 +36,14 @@ public class UserService {
         }
     }
 
+    public User getUserById(Long id) {
+        return dao.getUserById(id);
+    }
+
+    public void editUser(User user) {
+        if (user != null) {
+            dao.editUser(user);
+        }
+    }
+
 }

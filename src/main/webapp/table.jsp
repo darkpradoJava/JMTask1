@@ -42,5 +42,13 @@
     Id: <input type="number" name="id">
     <input type="submit" value="удалить">
 </form>
+<p>Изменить пользователя по id:</p>
+<form action="" method ="POST">
+    <input type="hidden" name="action" value="update">
+    Id: <input type="number" name="id">
+    Login: <input type="text" name="login">
+    Password: <input type="password" name="password">
+    <input type="submit" value="изменить">
+</form>
 </body>
 </html>
