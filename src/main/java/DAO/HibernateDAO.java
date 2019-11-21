@@ -9,14 +9,15 @@ import util.DBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
+public class HibernateDAO implements DAO {
 
     private SessionFactory sessionFactory;
 
-    public UserDao() {
+    public HibernateDAO() {
         sessionFactory = DBHelper.getSessionFactory();
     }
 
+    @Override
     public List<User> getAllUsers() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -27,6 +28,7 @@ public class UserDao {
         return list;
     }
 
+    @Override
     public void addUser(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -43,6 +45,7 @@ public class UserDao {
         session.close();
     }
 
+    @Override
     public void deleteUser(User user) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -51,6 +54,7 @@ public class UserDao {
         session.close();
     }
 
+    @Override
     public User getUserById(Long id) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
