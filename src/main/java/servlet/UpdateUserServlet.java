@@ -2,6 +2,7 @@ package servlet;
 
 import model.User;
 import service.UserService;
+import service.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +16,7 @@ import java.util.List;
 @WebServlet("/update")
 public class UpdateUserServlet extends HttpServlet {
 
-    private UserService userService = UserService.getInstance();
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

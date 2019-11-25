@@ -1,1 +1,1 @@
-dao = hibernate
+dao = jdbc
