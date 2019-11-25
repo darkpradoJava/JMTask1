@@ -14,6 +14,18 @@ import java.sql.SQLException;
 public class DBHelper {
 
     private static SessionFactory sessionFactory;
+    private static DBHelper instance;
+
+    private DBHelper() {
+
+    }
+
+    public static DBHelper getInstance() {
+        if(instance == null) {
+            instance = new DBHelper();
+        }
+        return instance;
+    }
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {

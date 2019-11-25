@@ -37,14 +37,12 @@
     <input type="submit" value="добавить">
 </form>
 <p>Удалить пользователя по id:</p>
-<form action="" method ="POST">
-    <input type="hidden" name="action" value="delete">
+<form action="./delete" method ="POST">
     Id: <input type="number" name="id">
     <input type="submit" value="удалить">
 </form>
 <p>Изменить пользователя по id:</p>
-<form action="" method ="POST">
-    <input type="hidden" name="action" value="update">
+<form action="./update" method ="POST">
     Id: <input type="number" name="id">
     Login: <input type="text" name="login">
     Password: <input type="password" name="password">

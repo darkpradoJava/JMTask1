@@ -9,11 +9,11 @@ import util.DBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HibernateDAO implements DAO {
+public class HibernateUserDAO implements UserDAO {
 
     private SessionFactory sessionFactory;
 
-    public HibernateDAO() {
+    public HibernateUserDAO() {
         sessionFactory = DBHelper.getSessionFactory();
     }
 

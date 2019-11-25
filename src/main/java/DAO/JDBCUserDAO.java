@@ -7,15 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBCDAO implements DAO {
-
-    public static void main(String[] args) {
-        JDBCDAO dao = new JDBCDAO();
-        List<User> list = dao.getAllUsers();
-        for (User user : list) {
-            System.out.println(user.toString());
-        }
-    }
+public class JDBCUserDAO implements UserDAO {
 
     private Connection connection = DBHelper.getMysqlConnection();
 
