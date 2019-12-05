@@ -29,7 +29,7 @@ public class DeleteUserServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         List<User> list = userService.getAllUsers();
         req.setAttribute("list", list);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("pageForAdmin.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("../pageForAdmin.jsp");
         dispatcher.forward(req, resp);
     }
 

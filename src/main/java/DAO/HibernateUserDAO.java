@@ -74,7 +74,7 @@ public class HibernateUserDAO implements UserDAO {
     public User getUserByLogin(String login) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        User user;
+        User user = null;
         try {
             Query query = session.createQuery("from User where login = :login").setParameter("login", login);
             user = (User) query.uniqueResult();

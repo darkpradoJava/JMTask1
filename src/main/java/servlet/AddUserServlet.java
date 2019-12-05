@@ -20,18 +20,18 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        String role = req.getParameter("role");
+        if (login != null && !login.equals("") && password != null && !password.equals("")) {
+            User user = new User(login, password, role);
+            userService.addUser(user);
 
-            String login = req.getParameter("login");
-            String password = req.getParameter("password");
-            if (login != null && !login.equals("") && password != null && !password.equals("")) {
-                User user = new User(login, password);
-                userService.addUser(user);
-
-                resp.setContentType("text/html;charset=utf-8");
-                List<User> list = userService.getAllUsers();
-                req.setAttribute("list", list);
-                RequestDispatcher dispatcher = req.getRequestDispatcher("pageForAdmin.jsp");
-                dispatcher.forward(req, resp);
+            resp.setContentType("text/html;charset=utf-8");
+            List<User> list = userService.getAllUsers();
+            req.setAttribute("list", list);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("../pageForAdmin.jsp");
+            dispatcher.forward(req, resp);
         }
     }
 

@@ -22,6 +22,7 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+        String role = req.getParameter("role");
         Long id;
         try {
             id = Long.parseLong(req.getParameter("id"));
@@ -37,12 +38,13 @@ public class UpdateUserServlet extends HttpServlet {
             if (password != null && !password.equals("")) {
                 user.setPassword(password);
             }
+            user.setRole(role);
         }
         userService.editUser(user);
         resp.setContentType("text/html;charset=utf-8");
         List<User> list = userService.getAllUsers();
         req.setAttribute("list", list);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("pageForAdmin.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("../pageForAdmin.jsp");
         dispatcher.forward(req, resp);
     }
 

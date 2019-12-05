@@ -29,7 +29,7 @@ public class adminFilter implements Filter {
         }
 
         if (role.equals(String.valueOf(UserRole.admin))) {
-            request.getRequestDispatcher("/admin").forward(request, response);
+            chain.doFilter(request, response);
         } else {
             request.getRequestDispatcher("/user").forward(request, response);
         }

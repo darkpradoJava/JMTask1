@@ -50,7 +50,8 @@ public class JDBCUserDAO implements UserDAO {
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("INSERT INTO users SET login ='" + user.getLogin() +
-                    "', password = '" + user.getPassword() + "', role = " + user.getRole() + "'");
+                    "', password = '" + user.getPassword() +
+                    "', role = '" + user.getRole() + "'");
             stmt.close();
         } catch (SQLException ignore) {
 

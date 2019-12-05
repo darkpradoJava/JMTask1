@@ -48,6 +48,8 @@
     Id: <input type="number" name="id">
     Login: <input type="text" name="login">
     Password: <input type="password" name="password">
+    Role: <input type="radio" name="role" value="user" checked> user
+    <input type="radio" name="role" value="admin"> admin
     <input type="submit" value="изменить">
 </form>
 </body>
