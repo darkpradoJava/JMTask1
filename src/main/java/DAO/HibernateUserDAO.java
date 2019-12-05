@@ -69,4 +69,24 @@ public class HibernateUserDAO implements UserDAO {
         session.close();
         return user;
     }
+
+    @Override
+    public User getUserByLogin(String login) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        User user;
+        try {
+            Query query = session.createQuery("from User where login = :login").setParameter("login", login);
+            user = (User) query.uniqueResult();
+        } catch (Exception e) {
+            user = null;
+        }
+        return user;
+    }
+
+    @Override
+    public boolean validateUser(String login, String password) {
+        User user = getUserByLogin(login);
+        return user.getPassword().equals(password);
+    }
 }

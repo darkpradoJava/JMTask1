@@ -53,4 +53,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean validateUser(String login, String password) {
+        return dao.validateUser(login, password);
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        return dao.getUserByLogin(login);
+    }
+
 }

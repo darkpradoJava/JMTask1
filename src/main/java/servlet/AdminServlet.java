@@ -13,19 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/delete")
-public class DeleteUserServlet extends HttpServlet {
+@WebServlet("/admin")
+public class AdminServlet extends HttpServlet {
 
     private UserService userService = UserServiceImpl.getInstance();
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id;
-        try {
-            id = Long.parseLong(req.getParameter("id"));
-        } catch (Exception e) {
-            id = (long)-1;
-        }
-        userService.deleteUserById(id);
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=utf-8");
         List<User> list = userService.getAllUsers();
         req.setAttribute("list", list);
@@ -33,4 +27,8 @@ public class DeleteUserServlet extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }

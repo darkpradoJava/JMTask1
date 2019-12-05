@@ -24,7 +24,8 @@ public class JDBCUserDAO implements UserDAO {
                     long id = result.getLong(1);
                     String login = result.getString(2);
                     String password = result.getString(3);
-                    list.add(new User(id, login, password));
+                    String role = result.getString(4);
+                    list.add(new User(id, login, password, role));
                     if (result.isLast()) {
                         break;
                     }
@@ -49,7 +50,7 @@ public class JDBCUserDAO implements UserDAO {
         try {
             Statement stmt = connection.createStatement();
             stmt.executeUpdate("INSERT INTO users SET login ='" + user.getLogin() +
-                    "', password = '" + user.getPassword() + "'");
+                    "', password = '" + user.getPassword() + "', role = " + user.getRole() + "'");
             stmt.close();
         } catch (SQLException ignore) {
 
@@ -59,11 +60,12 @@ public class JDBCUserDAO implements UserDAO {
     @Override
     public void editUser(User user) {
         try {
-            String sql = "UPDATE users set login=?, password=? where id=?";
+            String sql = "UPDATE users set login=?, password=?, role=? where id=?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
-            statement.setLong(3, user.getId());
+            statement.setString(3, user.getRole());
+            statement.setLong(4, user.getId());
             statement.executeUpdate();
             statement.close();
         } catch (SQLException ignore) {
@@ -97,5 +99,30 @@ public class JDBCUserDAO implements UserDAO {
         } catch (SQLException e) {
             return null;
         }
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute("select * from users where login = '" + login + "'");
+            ResultSet result = stmt.getResultSet();
+            result.next();
+
+            long idRes = result.getLong(1);
+            String loginRes = result.getString(2);
+            String passwordRes = result.getString(3);
+            String roleRes = result.getString(4);
+
+            return new User(idRes, loginRes, passwordRes, roleRes);
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean validateUser(String login, String password) {
+        User user = getUserByLogin(login);
+        return user.getPassword().equals(password);
     }
 }

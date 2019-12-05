@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/update")
+@WebServlet("/admin/update")
 public class UpdateUserServlet extends HttpServlet {
 
     private UserService userService = UserServiceImpl.getInstance();
@@ -39,9 +39,10 @@ public class UpdateUserServlet extends HttpServlet {
             }
         }
         userService.editUser(user);
+        resp.setContentType("text/html;charset=utf-8");
         List<User> list = userService.getAllUsers();
         req.setAttribute("list", list);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("pageForAdmin.jsp");
         dispatcher.forward(req, resp);
     }
 

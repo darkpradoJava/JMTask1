@@ -13,19 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/")
+@WebServlet("/admin/add")
 public class AddUserServlet extends HttpServlet {
 
     private UserService userService = UserServiceImpl.getInstance();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=utf-8");
-        List<User> list = userService.getAllUsers();
-        req.setAttribute("list", list);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
-        dispatcher.forward(req, resp);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,10 +27,11 @@ public class AddUserServlet extends HttpServlet {
                 User user = new User(login, password);
                 userService.addUser(user);
 
-            List<User> list = userService.getAllUsers();
-            req.setAttribute("list", list);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("table.jsp");
-            dispatcher.forward(req, resp);
+                resp.setContentType("text/html;charset=utf-8");
+                List<User> list = userService.getAllUsers();
+                req.setAttribute("list", list);
+                RequestDispatcher dispatcher = req.getRequestDispatcher("pageForAdmin.jsp");
+                dispatcher.forward(req, resp);
         }
     }
 
