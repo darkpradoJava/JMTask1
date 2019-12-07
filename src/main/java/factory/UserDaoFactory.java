@@ -1,18 +1,11 @@
 package factory;
 
-import DAO.HibernateUserDAO;
-import DAO.JDBCUserDAO;
 import DAO.UserDAO;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 public class UserDaoFactory {
 
     private static UserDaoFactory instance;
+    private Factory factory;
 
     private UserDaoFactory() {
 
@@ -26,21 +19,17 @@ public class UserDaoFactory {
     }
 
     public UserDAO getDao() {
-        Properties properties = new Properties();
-        try {
-            InputStream stream = UserDaoFactory.class.getClassLoader().getResourceAsStream("dao.property");
-            properties.load(stream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String config = properties.getProperty("dao");
+        String config = PropertyDaoHelper.getTypeDao();
         System.out.println(config);
         if (config.equalsIgnoreCase("Hibernate")) {
-            return new HibernateUserDAO();
+            factory = new HibernateUserDaoFactory();
+            return factory.createDao();
         } else if (config.equalsIgnoreCase("JDBC")) {
-            return new JDBCUserDAO();
+            factory = new JDBCUserDaoFactory();
+            return factory.createDao();
         } else {
-            return new JDBCUserDAO();
+            factory = new JDBCUserDaoFactory();
+            return factory.createDao();
         }
     }
 
