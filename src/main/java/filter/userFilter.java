@@ -24,11 +24,11 @@ public class userFilter implements Filter {
 
         String role = (String) request.getSession().getAttribute("role");
 
-        if (role == null) {
-            request.getRequestDispatcher("/login").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/user").forward(request, response);
+        if (role != null) {
+            chain.doFilter(request, response);
         }
+
+        response.sendRedirect("/login");
 
     }
 

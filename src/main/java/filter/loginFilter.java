@@ -27,9 +27,11 @@ public class loginFilter implements Filter {
         }
 
         if (role.equals(String.valueOf(UserRole.admin))) {
-            request.getRequestDispatcher("/admin").forward(request, response);
+            response.sendRedirect("/admin");
+            return;
         } else if (role.equals(String.valueOf(UserRole.user))) {
-            request.getRequestDispatcher("/user").forward(request, response);
+            response.sendRedirect("/user");
+            return;
         }
     }
 

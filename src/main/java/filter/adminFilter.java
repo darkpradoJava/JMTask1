@@ -24,17 +24,17 @@ public class adminFilter implements Filter {
 
         String role = (String) request.getSession().getAttribute("role");
 
-        if (role == null) {
-            response.sendRedirect("/login");
-            //request.getRequestDispatcher("/login").forward(request, response);
+        if (role != null) {
+            if (role.equals(String.valueOf(UserRole.admin))) {
+                chain.doFilter(request, response);
+                return;
+            } else if (role.equals(String.valueOf(UserRole.user))) {
+                response.sendRedirect("/user");
+                return;
+            }
         }
 
-        if (role.equals(String.valueOf(UserRole.admin))) {
-            chain.doFilter(request, response);
-        } else {
-            response.sendRedirect("/user");
-            //request.getRequestDispatcher("/user").forward(request, response);
-        }
+        response.sendRedirect("/login");
     }
 
     @Override
